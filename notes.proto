@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+service EnviarMensagem {
+    rpc receberMensagens(voidNoParam) returns (stream Mensagem);
+    rpc Envio (Mensagem) returns (voidNoParam);
+    rpc Hello (Hello) returns (Texto) {};
+    rpc Cadastro (Cadastro) returns (Texto) {};
+}
+
+message voidNoParam {}
+
+message Hello {
+    bool flag = 1;
+}
+
+message Cadastro {
+    string nome = 1;
+    string id = 2;
+}
+
+message Texto {
+    string texto = 1;
+}
+
+message Mensagem {
+    string from = 1;
+    string texto = 2;
+    string id = 3;
+    string mensagemId = 4;
+}
