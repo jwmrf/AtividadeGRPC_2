@@ -10,7 +10,7 @@ const rl = readline.createInterface({
 const client = require('./client-grpc')
 client.Hello({flag: true}, (error, resultado) => {
     if (!error) {
-        console.log(`Servidor: Informe o Nickname`)
+        console.log(`Servidor: ${resultado.texto}`)
     } else {
         console.log("Servidor: Lamento Irmão, deu ruim no servidor...")
     }

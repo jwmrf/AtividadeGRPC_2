@@ -8,6 +8,7 @@ const crypto = require('crypto')
 
 var clientsName = [] //Array que fará a relação de cada id de cliente com seu respectivo nome
 var messageList = [] //Array que irá armazenar as mensagens que serão enviadas
+var clientsCount = 0
 
 function Envio(call) {
     let uniqueMessageId = crypto.randomUUID() //Cada mensagem possuirá um ID único
@@ -23,12 +24,13 @@ function Envio(call) {
 server.addService(notesProto.EnviarMensagem.service, {
     Envio:Envio,
     Hello: (Hello , callback) => {
-        callback(null,"Informe seu Nickname:")
+        callback(null,{texto:`Há ${clientsCount} Usuários no chat, informe seu nickname:`})
     },
     Cadastro: (cadastro , callback) => {
         let id = cadastro.request.id
         let nome = cadastro.request.nome
         clientsName[id] = {nome : nome}
+        clientsCount ++
         console.log(`Cadastrando: ${nome}`)
         callback(null,"")
     },
